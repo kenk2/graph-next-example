@@ -9,13 +9,22 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "prettier": "prettier **/*.{md,css,ts,tsx} --check",
-    "prettier:fix": "prettier **/*.{md,css,ts,tsx} --write"
+    "prettier:fix": "prettier **/*.{md,css,ts,tsx} --write",
+    "migrate": "node-pg-migrate",
+    "migrate:up": "node-pg-migrate up",
+    "migrate:down": "node-pg-migrate down"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.12",
+    "@apollo/server": "^4.6.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
     "next": "13.2.4",
+    "node-pg-migrate": "^6.2.2",
+    "pg": "^8.10.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.0.2"
