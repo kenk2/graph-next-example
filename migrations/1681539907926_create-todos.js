@@ -16,6 +16,7 @@ exports.up = (pgm) => {
       editted_at: {
         type: "timestamptz",
         default: pgm.func("current_timestamp"),
+        notNull: false,
       },
     },
     {

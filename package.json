@@ -12,7 +12,8 @@
     "prettier:fix": "prettier **/*.{md,css,ts,tsx} --write",
     "migrate": "node-pg-migrate",
     "migrate:up": "node-pg-migrate up",
-    "migrate:down": "node-pg-migrate down"
+    "migrate:down": "node-pg-migrate down",
+    "migrate:downup": "node-pg-migrate down && node-pg-migrate up"
   },
   "dependencies": {
     "@apollo/client": "^3.7.12",

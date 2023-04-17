@@ -13,7 +13,7 @@ const pg = knex({
 const Queries = {
   Query: {
     todos: async () => {
-      const rows = await pg("todos").select("*").orderBy("id");
+      const rows = await pg("todos").select("*");
       return rows.map((x: Todo) => ({
         ...x,
         created_at: utcToZonedTime(x.created_at, timeZone),
@@ -29,6 +29,7 @@ const Queries = {
       const result = await pg("todos")
         .insert({
           text: args.text,
+          editted_at: null,
         })
         .returning("*");
       return result[0];

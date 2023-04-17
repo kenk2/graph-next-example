@@ -44,9 +44,15 @@ export default function TodoCard(props: TodoProps) {
     <Card sx={{ width: "100%" }}>
       <CardContent>
         <Box
-          sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            borderBottom: "1px solid black",
+            paddingBottom: "8px",
+          }}
         >
-          <Typography>#{todo.id}</Typography>
+          <Typography>{new Date(todo.created_at).toLocaleString()}</Typography>
           <LoadingButton onClick={handleToggleEdit} sx={{ marginLeft: "auto" }}>
             <Edit />
           </LoadingButton>
@@ -59,7 +65,7 @@ export default function TodoCard(props: TodoProps) {
             <Delete />
           </LoadingButton>
         </Box>
-        <Box>
+        <Box sx={{ marginTop: "8px" }}>
           {editting ? (
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TextField
@@ -79,9 +85,16 @@ export default function TodoCard(props: TodoProps) {
             todo.text
           )}
         </Box>
-        <Box>Created At: {new Date(todo.created_at).toLocaleString()}</Box>
         {todo.editted_at ? (
-          <Box>Last Updated: {new Date(todo.editted_at).toLocaleString()}</Box>
+          <Box
+            sx={{
+              borderTop: "1px solid black",
+              marginTop: "8px",
+              paddingTop: "8px",
+            }}
+          >
+            Last Updated: {new Date(todo.editted_at).toLocaleString()}
+          </Box>
         ) : undefined}
       </CardContent>
     </Card>
