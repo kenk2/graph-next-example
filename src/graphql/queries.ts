@@ -26,10 +26,20 @@ const DELETE_TODO = gql`
   }
 `;
 
+const UPDATE_TODO = gql`
+  mutation EditTodo($id: ID!, $text: String!) {
+    editTodo(id: $id, text: $text) {
+      id
+      text
+    }
+  }
+`;
+
 const queries = {
   GET_TODOS,
   ADD_TODO,
   DELETE_TODO,
+  UPDATE_TODO,
 };
 
 export default queries;

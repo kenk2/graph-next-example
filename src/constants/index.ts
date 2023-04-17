@@ -1,3 +1,3 @@
-const foo = 9;
+const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
 
-export default foo;
+export default timeZone;

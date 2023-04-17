@@ -18,6 +18,12 @@ export default function TodoInput() {
     addTodo({ variables: { text } });
   };
 
+  const handleEnter = (evt: React.KeyboardEvent) => {
+    if (evt.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -31,20 +37,23 @@ export default function TodoInput() {
         value={text}
         fullWidth
         disabled={loading}
+        onKeyDown={handleEnter}
         onChange={(evt) => setText(evt.target.value)}
       />
       <Box sx={{ display: "flex", marginTop: "12px" }}>
         <LoadingButton
-          disabled={loading}
+          loading={loading}
           variant="outlined"
           color="info"
           sx={{ marginLeft: "auto", marginRight: "8px" }}
+          onClick={() => setText("")}
         >
           Clear
         </LoadingButton>
         <LoadingButton
           variant="contained"
-          disabled={text.length === 0 || loading}
+          loading={loading}
+          disabled={text.length === 0}
           onClick={handleSubmit}
         >
           Submit

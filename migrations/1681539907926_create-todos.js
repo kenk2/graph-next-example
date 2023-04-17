@@ -9,9 +9,13 @@ exports.up = (pgm) => {
       id: "id",
       text: "text",
       created_at: {
-        type: "timestamp",
+        type: "timestamptz",
         default: pgm.func("current_timestamp"),
         notNull: true,
+      },
+      editted_at: {
+        type: "timestamptz",
+        default: pgm.func("current_timestamp"),
       },
     },
     {

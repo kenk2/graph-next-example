@@ -1,5 +1,8 @@
+import { utcToZonedTime } from "date-fns-tz";
 import { GraphQLScalarType, Kind } from "graphql";
 import knex from "knex";
+import Todo from "@kenk2/types";
+import timeZone from "@kenk2/constants";
 
 const pg = knex({
   client: "pg",
@@ -10,8 +13,14 @@ const pg = knex({
 const Queries = {
   Query: {
     todos: async () => {
-      const rows = await pg("todos").select("*");
-      return rows;
+      const rows = await pg("todos").select("*").orderBy("id");
+      return rows.map((x: Todo) => ({
+        ...x,
+        created_at: utcToZonedTime(x.created_at, timeZone),
+        editted_at: x.editted_at
+          ? utcToZonedTime(new Date(x.editted_at), timeZone)
+          : undefined,
+      }));
     },
   },
 
@@ -28,6 +37,13 @@ const Queries = {
       const result = await pg("todos")
         .where("id", args.id)
         .del()
+        .returning("*");
+      return result[0];
+    },
+    editTodo: async (_, args: any) => {
+      const result = await pg("todos")
+        .where("id", args.id)
+        .update({ text: args.text })
         .returning("*");
       return result[0];
     },
