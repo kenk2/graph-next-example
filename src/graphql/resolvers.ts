@@ -2,7 +2,7 @@ import { utcToZonedTime } from "date-fns-tz";
 import { GraphQLScalarType, Kind } from "graphql";
 import knex from "knex";
 import Todo from "@kenk2/types";
-import timeZone from "@kenk2/constants";
+import { timeZone } from "@kenk2/constants";
 
 const pg = knex({
   client: "pg",

@@ -41,7 +41,7 @@ export default function TodoCard(props: TodoProps) {
   };
 
   return (
-    <Card sx={{ width: "100%" }}>
+    <Card sx={{ width: "100%", marginTop: "8px" }}>
       <CardContent>
         <Box
           sx={{
