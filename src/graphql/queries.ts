@@ -6,6 +6,7 @@ const GET_TODOS = gql`
       id
       text
       created_at
+      editted_at
     }
   }
 `;

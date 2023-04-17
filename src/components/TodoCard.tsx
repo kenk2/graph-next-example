@@ -79,7 +79,10 @@ export default function TodoCard(props: TodoProps) {
             todo.text
           )}
         </Box>
-        <Box>{new Date(todo.created_at).toLocaleString()}</Box>
+        <Box>Created At: {new Date(todo.created_at).toLocaleString()}</Box>
+        {todo.editted_at ? (
+          <Box>Last Updated: {new Date(todo.editted_at).toLocaleString()}</Box>
+        ) : undefined}
       </CardContent>
     </Card>
   );

@@ -18,7 +18,7 @@ const Queries = {
         ...x,
         created_at: utcToZonedTime(x.created_at, timeZone),
         editted_at: x.editted_at
-          ? utcToZonedTime(new Date(x.editted_at), timeZone)
+          ? utcToZonedTime(x.editted_at, timeZone)
           : undefined,
       }));
     },
@@ -43,7 +43,7 @@ const Queries = {
     editTodo: async (_, args: any) => {
       const result = await pg("todos")
         .where("id", args.id)
-        .update({ text: args.text })
+        .update({ text: args.text, editted_at: pg.fn.now() })
         .returning("*");
       return result[0];
     },

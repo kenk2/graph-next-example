@@ -7,6 +7,7 @@ const typeDefs = gql`
     id: ID!
     text: String!
     created_at: Date!
+    editted_at: Date
   }
 
   type Query {
