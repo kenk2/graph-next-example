@@ -5,6 +5,7 @@ const GET_TODOS = gql`
     todos {
       id
       text
+      created_at
     }
   }
 `;
