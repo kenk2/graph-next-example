@@ -24,6 +24,13 @@ const Queries = {
         .returning("*");
       return result[0];
     },
+    deleteTodo: async (_, args: any) => {
+      const result = await pg("todos")
+        .where("id", args.id)
+        .del()
+        .returning("*");
+      return result[0];
+    },
   },
 
   Date: new GraphQLScalarType({

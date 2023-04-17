@@ -1,14 +1,16 @@
-import { Box, Card, CardContent, IconButton, Typography } from "@mui/material";
+import { Box, Card, CardContent, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { Delete } from "@mui/icons-material/";
 import Todo from "../types";
 
 type TodoProps = {
   todo: Todo;
   onDelete: (id: number) => void;
+  deleting: boolean;
 };
 
 export default function TodoCard(props: TodoProps) {
-  const { todo, onDelete } = props;
+  const { todo, onDelete, deleting } = props;
 
   return (
     <Card sx={{ width: "100%" }}>
@@ -17,13 +19,14 @@ export default function TodoCard(props: TodoProps) {
           sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
         >
           <Typography>#{todo.id}</Typography>
-          <IconButton
+          <LoadingButton
+            loading={deleting}
             color="error"
             sx={{ marginLeft: "auto" }}
             onClick={() => onDelete(todo.id)}
           >
             <Delete />
-          </IconButton>
+          </LoadingButton>
         </Box>
         <Box>{todo.text}</Box>
       </CardContent>

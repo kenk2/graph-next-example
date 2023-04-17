@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Backdrop, CircularProgress, Typography } from "@mui/material";
 import { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
 import styles from "@/styles/Home.module.css";
 import { queries } from "@kenk2/graphql";
@@ -11,9 +11,14 @@ import Todo from "@kenk2/types";
 export default function Home() {
   const { loading, data } = useQuery(queries.GET_TODOS);
   const [deleteId, setDeleteId] = useState<undefined | number>();
+  const [deleteTodos] = useMutation(queries.DELETE_TODO, {
+    onCompleted: () => setDeleteId(undefined),
+    refetchQueries: [queries.GET_TODOS],
+  });
 
   const handleDelete = (id: number) => {
     setDeleteId(id);
+    deleteTodos({ variables: { id } });
   };
 
   return (
@@ -26,12 +31,17 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <Typography sx={{ marginBottom: "8px" }}>GraphQL Todos</Typography>
-        <Backdrop open={deleteId !== undefined || loading}>
+        <Backdrop open={loading}>
           <CircularProgress />
         </Backdrop>
         <TodoInput />
         {data?.todos?.map((todo: Todo) => (
-          <TodoCard todo={todo} key={todo.id} onDelete={handleDelete} />
+          <TodoCard
+            todo={todo}
+            key={todo.id}
+            onDelete={handleDelete}
+            deleting={todo.id === deleteId}
+          />
         ))}
       </main>
     </>

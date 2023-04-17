@@ -18,9 +18,18 @@ const ADD_TODO = gql`
   }
 `;
 
+const DELETE_TODO = gql`
+  mutation DeleteTodo($id: ID!) {
+    deleteTodo(id: $id) {
+      id
+    }
+  }
+`;
+
 const queries = {
   GET_TODOS,
   ADD_TODO,
+  DELETE_TODO,
 };
 
 export default queries;

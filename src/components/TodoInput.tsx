@@ -29,7 +29,6 @@ export default function TodoInput() {
     >
       <TextField
         value={text}
-        multiline
         fullWidth
         disabled={loading}
         onChange={(evt) => setText(evt.target.value)}
