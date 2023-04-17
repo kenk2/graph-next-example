@@ -18,6 +18,8 @@ exports.up = (pgm) => {
       ifNotExists: true,
     }
   );
+
+  pgm.createIndex("todos", "id");
 };
 
 exports.down = (pgm) => {
