@@ -3,13 +3,18 @@ import { gql } from "@apollo/client";
 const typeDefs = gql`
   scalar Date
 
-  type Todos {
+  type Todo {
     id: ID!
     text: String!
     created_at: Date!
   }
+
   type Query {
-    todos: [Todos]
+    todos: [Todo]
+  }
+
+  type Mutation {
+    addTodo(text: String!): Todo
   }
 `;
 

@@ -4,6 +4,7 @@ import knex from "knex";
 const pg = knex({
   client: "pg",
   connection: process.env.DATABASE_URL,
+  pool: { min: 0, max: 1 },
 });
 
 const Queries = {
@@ -13,6 +14,18 @@ const Queries = {
       return rows;
     },
   },
+
+  Mutation: {
+    addTodo: async (_, args: any) => {
+      const result = await pg("todos")
+        .insert({
+          text: args.text,
+        })
+        .returning("*");
+      return result[0];
+    },
+  },
+
   Date: new GraphQLScalarType({
     name: "Date",
     description: "Date custom scalar type",

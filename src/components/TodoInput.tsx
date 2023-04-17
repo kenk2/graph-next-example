@@ -1,12 +1,23 @@
-import { Box, Button, TextField } from "@mui/material";
+import { useMutation } from "@apollo/client";
+import { Box, TextField } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import React, { useState } from "react";
+
+import { queries } from "@kenk2/graphql";
 
 export default function TodoInput() {
   const [text, setText] = useState("");
+  const [addTodo, { loading }] = useMutation(queries.ADD_TODO, {
+    onCompleted: () => {
+      setText("");
+    },
+    refetchQueries: [queries.GET_TODOS],
+  });
 
-  const handleSubmit = (evt: React.FormEvent) => {
-    evt.preventDefault();
+  const handleSubmit = () => {
+    addTodo({ variables: { text } });
   };
+
   return (
     <Box
       sx={{
@@ -17,21 +28,28 @@ export default function TodoInput() {
       }}
     >
       <TextField
+        value={text}
         multiline
         fullWidth
+        disabled={loading}
         onChange={(evt) => setText(evt.target.value)}
       />
       <Box sx={{ display: "flex", marginTop: "12px" }}>
-        <Button
+        <LoadingButton
+          disabled={loading}
           variant="outlined"
           color="info"
           sx={{ marginLeft: "auto", marginRight: "8px" }}
         >
           Clear
-        </Button>
-        <Button variant="contained" disabled={text.length === 0}>
+        </LoadingButton>
+        <LoadingButton
+          variant="contained"
+          disabled={text.length === 0 || loading}
+          onClick={handleSubmit}
+        >
           Submit
-        </Button>
+        </LoadingButton>
       </Box>
     </Box>
   );
