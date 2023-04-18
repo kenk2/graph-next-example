@@ -6,17 +6,17 @@ A Fullstack App that organizes Todos
 
 - NextJS w/ Typescript
 - Apollo GraphQL
-- PostGresQL w/ Knex
+- PostGresQL w/ Knex ORM
+- Material UI
 
 # How to Run
 
 1. Create a `.env` file and add the following: `DATABASE_URL=YOUR_CONNECTION_STRING_HERE`
-2. `yarn dev`
-3. Your app should be ready to go at port `3000`!
+2. `yarn install`
+3. `yarn knex:downup`
+4. `yarn dev`
 
-# Docker Compose Setup
-
-If you have Docker, then all you need to do is run
+Your app should be ready at port `3000`!
 
 # Demo
 
