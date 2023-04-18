@@ -25,7 +25,7 @@ const Queries = {
   },
 
   Mutation: {
-    addTodo: async (_, args: any) => {
+    addTodo: async (_: unknown, args: { text: string }) => {
       const result = await pg("todos")
         .insert({
           text: args.text,
@@ -34,14 +34,14 @@ const Queries = {
         .returning("*");
       return result[0];
     },
-    deleteTodo: async (_, args: any) => {
+    deleteTodo: async (_: unknown, args: { id: number }) => {
       const result = await pg("todos")
         .where("id", args.id)
         .del()
         .returning("*");
       return result[0];
     },
-    editTodo: async (_, args: any) => {
+    editTodo: async (_: unknown, args: { id: number; text: string }) => {
       const result = await pg("todos")
         .where("id", args.id)
         .update({ text: args.text, editted_at: pg.fn.now() })
