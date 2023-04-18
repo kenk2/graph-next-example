@@ -16,7 +16,7 @@ A Fullstack App that organizes Todos
 3. `yarn knex:downup`
 4. `yarn dev`
 
-Your app should be ready at port http://localhost:3000!
+Your app should be ready at http://localhost:3000!
 
 # Demo
 
